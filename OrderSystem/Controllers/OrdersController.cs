@@ -27,24 +27,12 @@ namespace OrderSystem.Controllers
             return Ok(orders);
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetOrderById([FromRoute]int id)
-        //{
-        //    var order = await _orderRepository.GetOrderByIdAsync(id);
-        //    if (order == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(order);
-        //}
-
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderDto orderDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            // Create Order entity
             var order = new Order
             {
                 UserId = orderDto.UserId,
@@ -52,7 +40,6 @@ namespace OrderSystem.Controllers
                 Status = "Pending"
             };
 
-            // Add OrderItems from DTO
             foreach (var itemDto in orderDto.Items)
             {
                 var orderItem = new OrderItem
@@ -63,7 +50,6 @@ namespace OrderSystem.Controllers
                 order.OrderItems.Add(orderItem);
             }
 
-            // Save order and items (EF Core handles FK relationships)
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
