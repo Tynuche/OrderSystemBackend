@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36301.6 d17.14
+VisualStudioVersion = 17.14.36301.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderSystem", "OrderSystem\OrderSystem.csproj", "{B3F81325-E257-46FC-A128-37E8D4D04589}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SendMessage", "SendMessage\SendMessage.csproj", "{D2AE46F3-AEFA-47FD-A669-5CA87F6C9E79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B3F81325-E257-46FC-A128-37E8D4D04589}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3F81325-E257-46FC-A128-37E8D4D04589}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3F81325-E257-46FC-A128-37E8D4D04589}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2AE46F3-AEFA-47FD-A669-5CA87F6C9E79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2AE46F3-AEFA-47FD-A669-5CA87F6C9E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2AE46F3-AEFA-47FD-A669-5CA87F6C9E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2AE46F3-AEFA-47FD-A669-5CA87F6C9E79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
