@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using OrderSystem.Dto;
 using OrderSystem.Models;
 using OrderSystem.Repository;
+using SendMessage;
 
 namespace OrderSystem.Controllers
 {
@@ -13,11 +14,12 @@ namespace OrderSystem.Controllers
     {
         private readonly IOrderRepository _orderRepository;
         private readonly OrderSysDBContext _context;
-
-        public OrdersController(IOrderRepository orderRepository, OrderSysDBContext context)
+        public IConfiguration Configuration { get; set; }
+        public OrdersController(IOrderRepository orderRepository, OrderSysDBContext context, IConfiguration configuration)
         {
             _orderRepository = orderRepository;
             _context = context;
+            Configuration = configuration;
         }
 
         [HttpGet("")]
@@ -26,6 +28,7 @@ namespace OrderSystem.Controllers
             var orders = await _orderRepository.GetOrdersAsync();
             return Ok(orders);
         }
+       
 
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderDto orderDto)
@@ -50,6 +53,10 @@ namespace OrderSystem.Controllers
                 order.OrderItems.Add(orderItem);
             }
 
+            SendQueueData sendQueueData = new SendQueueData();
+            string connectionString = Configuration.GetValue<string>("ConnectionStrings:ServiceBusConnection");
+            string queueName = Configuration.GetValue<string>("ConnectionStrings:Queuename");
+            await sendQueueData.PushDataToQueue<Order>(Task.FromResult(order), connectionString, queueName);
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
